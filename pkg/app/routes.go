@@ -38,6 +38,11 @@ func (a *App) initializeRoutes() {
 	a.Router.HandleFunc(apiV2+"/groups", a.getGroups).Methods("GET", "OPTIONS")
 	a.Router.HandleFunc(apiV2+"/groups/{id}", a.getSingleGroup).Methods("GET", "OPTIONS")
 
+	// assets
+	a.Router.HandleFunc(apiV2+"/assets", a.getAssets).Methods("GET", "OPTIONS")
+	a.Router.HandleFunc(apiV2+"/assets/{id}", a.getSingleAsset).Methods("GET", "OPTIONS")
+	a.Router.HandleFunc(apiV2+"/assets/{id}", a.deleteSingleAsset).Methods("DELETE", "OPTIONS")
+
 	// Swagger
 	a.Router.PathPrefix("/docs").Handler(httpSwagger.WrapHandler)
 }

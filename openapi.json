@@ -1,0 +1,1255 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "contact": {
+      "email": "eti@cisco.io",
+      "name": "API Support"
+    },
+    "description": "This is a Kosha REST serice for exposing many freshservice features as REST APIs with better consistency, observability etc",
+    "termsOfService": "http://swagger.io/terms/",
+    "title": "Freshservice Connector API",
+    "version": "2.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/api/v2/agents": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.Agents"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "agents"
+        ],
+        "description": "List all agents",
+        "summary": "Get freshservice agents"
+      }
+    },
+    "/api/v2/agents/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "Agent id",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.Agent"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "agents"
+        ],
+        "description": "Deactivate agent by id",
+        "summary": "Deactivate freshservice agent by id"
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "Agent id",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.Agent"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "agents"
+        ],
+        "description": "List agent by id",
+        "summary": "Get freshservice agent by id"
+      }
+    },
+    "/api/v2/assets": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.Assets"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "assets"
+        ],
+        "description": "List all assets",
+        "summary": "Get assets details"
+      }
+    },
+    "/api/v2/assets/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "Enter id e.g., 1",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "assets"
+        ],
+        "description": "Delete asset by id",
+        "summary": "Delete single asset"
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "Enter id e.g., 1",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.SingleAsset"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "assets"
+        ],
+        "description": "List asset by id",
+        "summary": "Get single assets detail"
+      }
+    },
+    "/api/v2/groups": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.Groups"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "groups"
+        ],
+        "description": "List groups",
+        "summary": "Get group detail"
+      }
+    },
+    "/api/v2/groups/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Enter id e.g., 1",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.SingleGroup"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "groups"
+        ],
+        "description": "List group detail",
+        "summary": "Get single group detail"
+      }
+    },
+    "/api/v2/problems": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.Problems"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "problems"
+        ],
+        "description": "List all problems",
+        "summary": "Get problems detail"
+      }
+    },
+    "/api/v2/problems/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "Enter id e.g., 1",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "problems"
+        ],
+        "description": "Delete problem by id",
+        "summary": "Delete single problems detail"
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "Enter id e.g., 1",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.SingleProblem"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "problems"
+        ],
+        "description": "List problem by id",
+        "summary": "Get single problems detail"
+      }
+    },
+    "/api/v2/search": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Enter query parameter e.g., ",
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.SearchResults"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "search"
+        ],
+        "description": "Search tickets by passing various query parameters",
+        "summary": "Search tickets"
+      }
+    },
+    "/api/v2/specification/list": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "specification"
+        ],
+        "description": "Get all environment variables that need to be supplied",
+        "summary": "Get details of the connector specification"
+      }
+    },
+    "/api/v2/specification/test": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.Groups"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "specification"
+        ],
+        "description": "Check if domain account can be verified",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/models.Specification"
+              }
+            }
+          },
+          "description": "Enter api key and domain name properties"
+        },
+        "summary": "Test if API key and domain name work against the specification"
+      }
+    },
+    "/api/v2/stats/agent/{agent_id}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Enter agent id",
+            "in": "path",
+            "name": "agent_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.AllTickets"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "statistics"
+        ],
+        "description": "Get ticket statistics for a particular agent id",
+        "summary": "Get ticket statistics for a particular agent"
+      }
+    },
+    "/api/v2/stats/date/{created_at}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Enter created_at",
+            "in": "path",
+            "name": "created_at",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.AllTickets"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "statistics"
+        ],
+        "description": "Get ticket statistics for tickets created since a particular date",
+        "summary": "Get ticket statistics for tickets created since a particular date"
+      }
+    },
+    "/api/v2/stats/group/{group_id}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Enter group id",
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.AllTickets"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "statistics"
+        ],
+        "description": "Get ticket statistics for a particular group id",
+        "summary": "Get ticket statistics for a particular group"
+      }
+    },
+    "/api/v2/tickets": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/models.Ticket"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "tickets"
+        ],
+        "description": "List all tickets logged in the system",
+        "summary": "Get all tickets"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "tickets"
+        ],
+        "description": "Create single ticket in the system",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/models.Ticket"
+              }
+            }
+          },
+          "description": "Enter ticket properties"
+        },
+        "summary": "Create new ticket"
+      }
+    },
+    "/api/v2/tickets/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "Enter ticket id",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "tickets"
+        ],
+        "description": "Delete single ticket based on the ticket id logged in the system",
+        "summary": "Delete single ticket"
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "Enter ticket id",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/models.Ticket"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "tickets"
+        ],
+        "description": "List single ticket based on the ticket id logged in the system",
+        "summary": "Get single ticket"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "models.Agent": {
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "address": {},
+          "auto_assign_status_changed_at": {},
+          "auto_assign_tickets": {
+            "type": "boolean"
+          },
+          "background_information": {},
+          "can_see_all_tickets_from_associated_departments": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "custom_fields": {
+            "type": "object"
+          },
+          "department_ids": {
+            "items": {},
+            "type": "array"
+          },
+          "email": {
+            "type": "string"
+          },
+          "external_id": {},
+          "first_name": {
+            "type": "string"
+          },
+          "group_ids": {
+            "items": {},
+            "type": "array"
+          },
+          "has_logged_in": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "job_title": {},
+          "language": {
+            "type": "string"
+          },
+          "last_active_at": {
+            "type": "string"
+          },
+          "last_login_at": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "location_id": {},
+          "member_of": {
+            "items": {},
+            "type": "array"
+          },
+          "member_of_pending_approval": {
+            "items": {},
+            "type": "array"
+          },
+          "mobile_phone_number": {},
+          "observer_of": {
+            "items": {},
+            "type": "array"
+          },
+          "observer_of_pending_approval": {
+            "items": {},
+            "type": "array"
+          },
+          "occasional": {
+            "type": "boolean"
+          },
+          "reporting_manager_id": {},
+          "role_ids": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "roles": {
+            "items": {
+              "properties": {
+                "assignment_scope": {
+                  "type": "string"
+                },
+                "groups": {
+                  "items": {},
+                  "type": "array"
+                },
+                "role_id": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "scopes": {
+            "properties": {
+              "asset": {},
+              "change": {},
+              "contract": {},
+              "problem": {},
+              "release": {},
+              "solution": {},
+              "ticket": {}
+            },
+            "type": "object"
+          },
+          "scoreboard_level_id": {},
+          "scoreboard_points": {},
+          "signature": {},
+          "time_format": {
+            "type": "string"
+          },
+          "time_zone": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "vip_user": {
+            "type": "boolean"
+          },
+          "work_phone_number": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "models.Agents": {
+        "properties": {
+          "agents": {
+            "items": {
+              "$ref": "#/components/schemas/models.Agent"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "models.AllTickets": {
+        "properties": {
+          "closed_tickets": {
+            "$ref": "#/components/schemas/models.ClosedTickets"
+          },
+          "open_tickets": {
+            "$ref": "#/components/schemas/models.OpenTickets"
+          },
+          "pending_tickets": {
+            "$ref": "#/components/schemas/models.PendingTickets"
+          },
+          "resolved_tickets": {
+            "$ref": "#/components/schemas/models.ResolvedTickets"
+          }
+        },
+        "type": "object"
+      },
+      "models.Asset": {
+        "properties": {
+          "agent_id": {},
+          "asset_tag": {
+            "type": "string"
+          },
+          "asset_type_id": {
+            "type": "integer"
+          },
+          "assigned_on": {},
+          "author_type": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "department_id": {},
+          "description": {},
+          "display_id": {
+            "type": "integer"
+          },
+          "group_id": {},
+          "id": {
+            "type": "integer"
+          },
+          "impact": {
+            "type": "string"
+          },
+          "location_id": {},
+          "name": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "usage_type": {
+            "type": "string"
+          },
+          "user_id": {}
+        },
+        "type": "object"
+      },
+      "models.Assets": {
+        "properties": {
+          "assets": {
+            "items": {
+              "$ref": "#/components/schemas/models.Asset"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "models.ClosedTickets": {
+        "properties": {
+          "tickets": {
+            "items": {
+              "$ref": "#/components/schemas/models.Ticket"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "models.Group": {
+        "properties": {
+          "agent_ids": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "approval_required": {
+            "type": "boolean"
+          },
+          "auto_ticket_assign": {
+            "type": "boolean"
+          },
+          "business_hours_id": {},
+          "created_at": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "escalate_to": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "leaders": {
+            "items": {},
+            "type": "array"
+          },
+          "leaders_pending_approval": {
+            "items": {},
+            "type": "array"
+          },
+          "members": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "members_pending_approval": {
+            "items": {},
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "observers": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "observers_pending_approval": {
+            "items": {},
+            "type": "array"
+          },
+          "restricted": {
+            "type": "boolean"
+          },
+          "unassigned_for": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "models.Groups": {
+        "properties": {
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/models.Group"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "models.OpenTickets": {
+        "properties": {
+          "tickets": {
+            "items": {
+              "$ref": "#/components/schemas/models.Ticket"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "models.PendingTickets": {
+        "properties": {
+          "tickets": {
+            "items": {
+              "$ref": "#/components/schemas/models.Ticket"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "models.Problem": {
+        "properties": {
+          "agent_id": {},
+          "assets": {
+            "items": {},
+            "type": "array"
+          },
+          "category": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "department_id": {},
+          "description": {
+            "type": "string"
+          },
+          "description_text": {
+            "type": "string"
+          },
+          "due_by": {
+            "type": "string"
+          },
+          "group_id": {},
+          "id": {
+            "type": "integer"
+          },
+          "impact": {
+            "type": "integer"
+          },
+          "item_category": {
+            "type": "string"
+          },
+          "known_error": {
+            "type": "boolean"
+          },
+          "priority": {},
+          "requester_id": {
+            "type": "integer"
+          },
+          "status": {},
+          "sub_category": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "models.Problems": {
+        "properties": {
+          "problems": {
+            "items": {
+              "$ref": "#/components/schemas/models.Problem"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "models.Requester": {
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "mobile": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "models.ResolvedTickets": {
+        "properties": {
+          "tickets": {
+            "items": {
+              "$ref": "#/components/schemas/models.Ticket"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "models.SearchResults": {
+        "properties": {
+          "tickets": {
+            "items": {
+              "$ref": "#/components/schemas/models.Ticket"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "models.SingleAsset": {
+        "properties": {
+          "asset": {
+            "$ref": "#/components/schemas/models.Asset"
+          }
+        },
+        "type": "object"
+      },
+      "models.SingleGroup": {
+        "properties": {
+          "group": {
+            "$ref": "#/components/schemas/models.Group"
+          }
+        },
+        "type": "object"
+      },
+      "models.SingleProblem": {
+        "properties": {
+          "problem": {
+            "$ref": "#/components/schemas/models.Problem"
+          }
+        },
+        "type": "object"
+      },
+      "models.Specification": {
+        "properties": {
+          "api_key": {
+            "type": "string"
+          },
+          "domain_name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "models.Stats": {
+        "properties": {
+          "agent_responded_at": {},
+          "closed_at": {},
+          "first_responded_at": {},
+          "pending_since": {},
+          "reopened_at": {},
+          "requester_responded_at": {},
+          "resolved_at": {},
+          "status_updated_at": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "models.Ticket": {
+        "properties": {
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "associated_tickets_count": {},
+          "attachments": {
+            "items": {},
+            "type": "array"
+          },
+          "category": {},
+          "cc_emails": {
+            "items": {},
+            "type": "array"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "custom_fields": {
+            "type": "object"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "department_id": {},
+          "description": {
+            "type": "string"
+          },
+          "description_text": {
+            "type": "string"
+          },
+          "due_by": {
+            "type": "string"
+          },
+          "email_config_id": {},
+          "fr_due_by": {
+            "type": "string"
+          },
+          "fr_escalated": {
+            "type": "boolean"
+          },
+          "fwd_emails": {
+            "items": {},
+            "type": "array"
+          },
+          "group_id": {},
+          "id": {
+            "type": "integer"
+          },
+          "is_escalated": {
+            "type": "boolean"
+          },
+          "item_category": {},
+          "nr_due_by": {},
+          "nr_escalated": {
+            "type": "boolean"
+          },
+          "priority": {},
+          "reply_cc_emails": {
+            "items": {},
+            "type": "array"
+          },
+          "requested_for_id": {
+            "type": "integer"
+          },
+          "requester": {
+            "$ref": "#/components/schemas/models.Requester"
+          },
+          "requester_id": {
+            "type": "integer"
+          },
+          "responder_id": {},
+          "source": {},
+          "source_additional_info": {},
+          "spam": {
+            "type": "boolean"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/models.Stats"
+          },
+          "status": {},
+          "sub_category": {},
+          "subject": {
+            "type": "string"
+          },
+          "to_emails": {},
+          "twitter_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}

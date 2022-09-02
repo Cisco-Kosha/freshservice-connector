@@ -1,0 +1,847 @@
+basePath: /
+definitions:
+  models.Agent:
+    properties:
+      active:
+        type: boolean
+      address: {}
+      auto_assign_status_changed_at: {}
+      auto_assign_tickets:
+        type: boolean
+      background_information: {}
+      can_see_all_tickets_from_associated_departments:
+        type: boolean
+      created_at:
+        type: string
+      custom_fields:
+        type: object
+      department_ids:
+        items: {}
+        type: array
+      email:
+        type: string
+      external_id: {}
+      first_name:
+        type: string
+      group_ids:
+        items: {}
+        type: array
+      has_logged_in:
+        type: boolean
+      id:
+        type: integer
+      job_title: {}
+      language:
+        type: string
+      last_active_at:
+        type: string
+      last_login_at:
+        type: string
+      last_name:
+        type: string
+      location_id: {}
+      member_of:
+        items: {}
+        type: array
+      member_of_pending_approval:
+        items: {}
+        type: array
+      mobile_phone_number: {}
+      observer_of:
+        items: {}
+        type: array
+      observer_of_pending_approval:
+        items: {}
+        type: array
+      occasional:
+        type: boolean
+      reporting_manager_id: {}
+      role_ids:
+        items:
+          type: integer
+        type: array
+      roles:
+        items:
+          properties:
+            assignment_scope:
+              type: string
+            groups:
+              items: {}
+              type: array
+            role_id:
+              type: integer
+          type: object
+        type: array
+      scopes:
+        properties:
+          asset: {}
+          change: {}
+          contract: {}
+          problem: {}
+          release: {}
+          solution: {}
+          ticket: {}
+        type: object
+      scoreboard_level_id: {}
+      scoreboard_points: {}
+      signature: {}
+      time_format:
+        type: string
+      time_zone:
+        type: string
+      updated_at:
+        type: string
+      vip_user:
+        type: boolean
+      work_phone_number:
+        type: string
+    type: object
+  models.Agents:
+    properties:
+      agents:
+        items:
+          $ref: '#/definitions/models.Agent'
+        type: array
+    type: object
+  models.AllTickets:
+    properties:
+      closed_tickets:
+        $ref: '#/definitions/models.ClosedTickets'
+      open_tickets:
+        $ref: '#/definitions/models.OpenTickets'
+      pending_tickets:
+        $ref: '#/definitions/models.PendingTickets'
+      resolved_tickets:
+        $ref: '#/definitions/models.ResolvedTickets'
+    type: object
+  models.Asset:
+    properties:
+      agent_id: {}
+      asset_tag:
+        type: string
+      asset_type_id:
+        type: integer
+      assigned_on: {}
+      author_type:
+        type: string
+      created_at:
+        type: string
+      department_id: {}
+      description: {}
+      display_id:
+        type: integer
+      group_id: {}
+      id:
+        type: integer
+      impact:
+        type: string
+      location_id: {}
+      name:
+        type: string
+      updated_at:
+        type: string
+      usage_type:
+        type: string
+      user_id: {}
+    type: object
+  models.Assets:
+    properties:
+      assets:
+        items:
+          $ref: '#/definitions/models.Asset'
+        type: array
+    type: object
+  models.ClosedTickets:
+    properties:
+      tickets:
+        items:
+          $ref: '#/definitions/models.Ticket'
+        type: array
+      total:
+        type: integer
+    type: object
+  models.Group:
+    properties:
+      agent_ids:
+        items:
+          type: integer
+        type: array
+      approval_required:
+        type: boolean
+      auto_ticket_assign:
+        type: boolean
+      business_hours_id: {}
+      created_at:
+        type: string
+      description:
+        type: string
+      escalate_to:
+        type: integer
+      id:
+        type: integer
+      leaders:
+        items: {}
+        type: array
+      leaders_pending_approval:
+        items: {}
+        type: array
+      members:
+        items:
+          type: integer
+        type: array
+      members_pending_approval:
+        items: {}
+        type: array
+      name:
+        type: string
+      observers:
+        items:
+          type: integer
+        type: array
+      observers_pending_approval:
+        items: {}
+        type: array
+      restricted:
+        type: boolean
+      unassigned_for:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Groups:
+    properties:
+      groups:
+        items:
+          $ref: '#/definitions/models.Group'
+        type: array
+    type: object
+  models.OpenTickets:
+    properties:
+      tickets:
+        items:
+          $ref: '#/definitions/models.Ticket'
+        type: array
+      total:
+        type: integer
+    type: object
+  models.PendingTickets:
+    properties:
+      tickets:
+        items:
+          $ref: '#/definitions/models.Ticket'
+        type: array
+      total:
+        type: integer
+    type: object
+  models.Problem:
+    properties:
+      agent_id: {}
+      assets:
+        items: {}
+        type: array
+      category:
+        type: string
+      created_at:
+        type: string
+      department_id: {}
+      description:
+        type: string
+      description_text:
+        type: string
+      due_by:
+        type: string
+      group_id: {}
+      id:
+        type: integer
+      impact:
+        type: integer
+      item_category:
+        type: string
+      known_error:
+        type: boolean
+      priority: {}
+      requester_id:
+        type: integer
+      status: {}
+      sub_category:
+        type: string
+      subject:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Problems:
+    properties:
+      problems:
+        items:
+          $ref: '#/definitions/models.Problem'
+        type: array
+    type: object
+  models.Requester:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      mobile:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  models.ResolvedTickets:
+    properties:
+      tickets:
+        items:
+          $ref: '#/definitions/models.Ticket'
+        type: array
+      total:
+        type: integer
+    type: object
+  models.SearchResults:
+    properties:
+      tickets:
+        items:
+          $ref: '#/definitions/models.Ticket'
+        type: array
+      total:
+        type: integer
+    type: object
+  models.SingleAsset:
+    properties:
+      asset:
+        $ref: '#/definitions/models.Asset'
+    type: object
+  models.SingleGroup:
+    properties:
+      group:
+        $ref: '#/definitions/models.Group'
+    type: object
+  models.SingleProblem:
+    properties:
+      problem:
+        $ref: '#/definitions/models.Problem'
+    type: object
+  models.Specification:
+    properties:
+      api_key:
+        type: string
+      domain_name:
+        type: string
+    type: object
+  models.Stats:
+    properties:
+      agent_responded_at: {}
+      closed_at: {}
+      first_responded_at: {}
+      pending_since: {}
+      reopened_at: {}
+      requester_responded_at: {}
+      resolved_at: {}
+      status_updated_at:
+        type: string
+    type: object
+  models.Ticket:
+    properties:
+      associated_tickets_count: {}
+      attachments:
+        items: {}
+        type: array
+      category: {}
+      cc_emails:
+        items: {}
+        type: array
+      created_at:
+        type: string
+      custom_fields:
+        type: object
+      deleted:
+        type: boolean
+      department_id: {}
+      description:
+        type: string
+      description_text:
+        type: string
+      due_by:
+        type: string
+      email_config_id: {}
+      fr_due_by:
+        type: string
+      fr_escalated:
+        type: boolean
+      fwd_emails:
+        items: {}
+        type: array
+      group_id: {}
+      id:
+        type: integer
+      is_escalated:
+        type: boolean
+      item_category: {}
+      nr_due_by: {}
+      nr_escalated:
+        type: boolean
+      priority: {}
+      reply_cc_emails:
+        items: {}
+        type: array
+      requested_for_id:
+        type: integer
+      requester:
+        $ref: '#/definitions/models.Requester'
+      requester_id:
+        type: integer
+      responder_id: {}
+      source: {}
+      source_additional_info: {}
+      spam:
+        type: boolean
+      stats:
+        $ref: '#/definitions/models.Stats'
+      status: {}
+      sub_category: {}
+      subject:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+      to_emails: {}
+      twitter_id:
+        type: string
+      type:
+        type: string
+      updated_at:
+        type: string
+    type: object
+host: localhost:8012
+info:
+  contact:
+    email: eti@cisco.io
+    name: API Support
+  description: This is a Kosha REST serice for exposing many freshservice features
+    as REST APIs with better consistency, observability etc
+  termsOfService: http://swagger.io/terms/
+  title: Freshservice Connector API
+  version: "2.0"
+paths:
+  /api/v2/agents:
+    get:
+      consumes:
+      - application/json
+      description: List all agents
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Agents'
+      summary: Get freshservice agents
+      tags:
+      - agents
+  /api/v2/agents/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deactivate agent by id
+      parameters:
+      - description: Agent id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Agent'
+      summary: Deactivate freshservice agent by id
+      tags:
+      - agents
+    get:
+      consumes:
+      - application/json
+      description: List agent by id
+      parameters:
+      - description: Agent id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Agent'
+      summary: Get freshservice agent by id
+      tags:
+      - agents
+  /api/v2/assets:
+    get:
+      consumes:
+      - application/json
+      description: List all assets
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Assets'
+      summary: Get assets details
+      tags:
+      - assets
+  /api/v2/assets/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete asset by id
+      parameters:
+      - description: Enter id e.g., 1
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete single asset
+      tags:
+      - assets
+    get:
+      consumes:
+      - application/json
+      description: List asset by id
+      parameters:
+      - description: Enter id e.g., 1
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SingleAsset'
+      summary: Get single assets detail
+      tags:
+      - assets
+  /api/v2/groups:
+    get:
+      consumes:
+      - application/json
+      description: List groups
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Groups'
+      summary: Get group detail
+      tags:
+      - groups
+  /api/v2/groups/{id}:
+    get:
+      consumes:
+      - application/json
+      description: List group detail
+      parameters:
+      - description: Enter id e.g., 1
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SingleGroup'
+      summary: Get single group detail
+      tags:
+      - groups
+  /api/v2/problems:
+    get:
+      consumes:
+      - application/json
+      description: List all problems
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Problems'
+      summary: Get problems detail
+      tags:
+      - problems
+  /api/v2/problems/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete problem by id
+      parameters:
+      - description: Enter id e.g., 1
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete single problems detail
+      tags:
+      - problems
+    get:
+      consumes:
+      - application/json
+      description: List problem by id
+      parameters:
+      - description: Enter id e.g., 1
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SingleProblem'
+      summary: Get single problems detail
+      tags:
+      - problems
+  /api/v2/search:
+    get:
+      consumes:
+      - application/json
+      description: Search tickets by passing various query parameters
+      parameters:
+      - description: 'Enter query parameter e.g., '
+        in: query
+        name: query
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SearchResults'
+      summary: Search tickets
+      tags:
+      - search
+  /api/v2/specification/list:
+    get:
+      consumes:
+      - application/json
+      description: Get all environment variables that need to be supplied
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      summary: Get details of the connector specification
+      tags:
+      - specification
+  /api/v2/specification/test:
+    post:
+      consumes:
+      - application/json
+      description: Check if domain account can be verified
+      parameters:
+      - description: Enter api key and domain name properties
+        in: body
+        name: text
+        schema:
+          $ref: '#/definitions/models.Specification'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Groups'
+      summary: Test if API key and domain name work against the specification
+      tags:
+      - specification
+  /api/v2/stats/agent/{agent_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get ticket statistics for a particular agent id
+      parameters:
+      - description: Enter agent id
+        in: path
+        name: agent_id
+        required: true
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AllTickets'
+      summary: Get ticket statistics for a particular agent
+      tags:
+      - statistics
+  /api/v2/stats/date/{created_at}:
+    get:
+      consumes:
+      - application/json
+      description: Get ticket statistics for tickets created since a particular date
+      parameters:
+      - description: Enter created_at
+        in: path
+        name: created_at
+        required: true
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AllTickets'
+      summary: Get ticket statistics for tickets created since a particular date
+      tags:
+      - statistics
+  /api/v2/stats/group/{group_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get ticket statistics for a particular group id
+      parameters:
+      - description: Enter group id
+        in: path
+        name: group_id
+        required: true
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AllTickets'
+      summary: Get ticket statistics for a particular group
+      tags:
+      - statistics
+  /api/v2/tickets:
+    get:
+      consumes:
+      - application/json
+      description: List all tickets logged in the system
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Ticket'
+            type: array
+      summary: Get all tickets
+      tags:
+      - tickets
+    post:
+      consumes:
+      - application/json
+      description: Create single ticket in the system
+      parameters:
+      - description: Enter ticket properties
+        in: body
+        name: text
+        schema:
+          $ref: '#/definitions/models.Ticket'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Create new ticket
+      tags:
+      - tickets
+  /api/v2/tickets/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete single ticket based on the ticket id logged in the system
+      parameters:
+      - description: Enter ticket id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      summary: Delete single ticket
+      tags:
+      - tickets
+    get:
+      consumes:
+      - application/json
+      description: List single ticket based on the ticket id logged in the system
+      parameters:
+      - description: Enter ticket id
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Ticket'
+      summary: Get single ticket
+      tags:
+      - tickets
+swagger: "2.0"

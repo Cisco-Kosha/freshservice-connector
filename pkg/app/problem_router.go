@@ -13,6 +13,10 @@ import (
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} models.Problems
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/problems [get]
 func (a *App) getProblems(w http.ResponseWriter, r *http.Request) {
 
@@ -34,6 +38,10 @@ func (a *App) getProblems(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path string true "Enter id e.g., 1"
 // @Success 200 {object} models.SingleProblem
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/problems/{id} [get]
 func (a *App) getSingleProblem(w http.ResponseWriter, r *http.Request) {
 
@@ -58,6 +66,10 @@ func (a *App) getSingleProblem(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path string true "Enter id e.g., 1"
 // @Success 200 {object} string
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/problems/{id} [delete]
 func (a *App) deleteSingleProblem(w http.ResponseWriter, r *http.Request) {
 

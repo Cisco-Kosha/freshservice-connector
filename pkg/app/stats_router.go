@@ -16,6 +16,10 @@ import (
 // @Param agent_id path string true "Enter agent id"
 // @Param page query string false "Page number"
 // @Success 200 {object} models.AllTickets
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/stats/agent/{agent_id} [get]
 func (a *App) getStatsForAgent(w http.ResponseWriter, r *http.Request) {
 

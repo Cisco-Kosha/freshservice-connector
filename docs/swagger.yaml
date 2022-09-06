@@ -459,6 +459,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Agent'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Deactivate freshservice agent by id
       tags:
       - agents
@@ -494,6 +510,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Assets'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get assets details
       tags:
       - assets
@@ -513,6 +545,22 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            type: string
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
           schema:
             type: string
       summary: Delete single asset
@@ -535,6 +583,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SingleAsset'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get single assets detail
       tags:
       - assets
@@ -550,6 +614,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Groups'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get group detail
       tags:
       - groups
@@ -571,6 +651,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SingleGroup'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get single group detail
       tags:
       - groups
@@ -586,6 +682,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Problems'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get problems detail
       tags:
       - problems
@@ -605,6 +717,22 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            type: string
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
           schema:
             type: string
       summary: Delete single problems detail
@@ -627,6 +755,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SingleProblem'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get single problems detail
       tags:
       - problems
@@ -636,7 +780,7 @@ paths:
       - application/json
       description: Search tickets by passing various query parameters
       parameters:
-      - description: 'Enter query parameter e.g., '
+      - description: Enter query parameter e.g., priority:>2 (in quotes)
         in: query
         name: query
         required: true
@@ -648,6 +792,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SearchResults'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Search tickets
       tags:
       - search
@@ -663,6 +823,22 @@ paths:
           description: OK
           schema:
             type: object
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get details of the connector specification
       tags:
       - specification
@@ -684,6 +860,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Groups'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Test if API key and domain name work against the specification
       tags:
       - specification
@@ -709,6 +901,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.AllTickets'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get ticket statistics for a particular agent
       tags:
       - statistics
@@ -781,6 +989,22 @@ paths:
             items:
               $ref: '#/definitions/models.Ticket'
             type: array
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get all tickets
       tags:
       - tickets
@@ -799,6 +1023,22 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            type: string
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
           schema:
             type: string
       summary: Create new ticket
@@ -822,6 +1062,22 @@ paths:
           description: OK
           schema:
             type: object
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Delete single ticket
       tags:
       - tickets
@@ -841,6 +1097,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Ticket'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
       summary: Get single ticket
       tags:
       - tickets

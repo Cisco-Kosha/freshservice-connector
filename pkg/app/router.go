@@ -14,6 +14,10 @@ import (
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} object
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/specification/list [get]
 func (a *App) listConnectorSpecification(w http.ResponseWriter, r *http.Request) {
 
@@ -36,6 +40,10 @@ func (a *App) listConnectorSpecification(w http.ResponseWriter, r *http.Request)
 // @Produce  json
 // @Param text body models.Specification false "Enter api key and domain name properties"
 // @Success 200 {object} models.Groups
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/specification/test [post]
 func (a *App) testConnectorSpecification(w http.ResponseWriter, r *http.Request) {
 

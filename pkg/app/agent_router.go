@@ -58,6 +58,10 @@ func (a *App) getSingleAgent(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path string true "Agent id"
 // @Success 200 {object} models.Agent
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/agents/{id} [delete]
 func (a *App) deactivateSingleAgent(w http.ResponseWriter, r *http.Request) {
 

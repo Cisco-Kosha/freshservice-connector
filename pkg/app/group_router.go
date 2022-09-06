@@ -13,6 +13,10 @@ import (
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} models.Groups
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/groups [get]
 func (a *App) getGroups(w http.ResponseWriter, r *http.Request) {
 
@@ -34,6 +38,10 @@ func (a *App) getGroups(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path string true "Enter id e.g., 1"
 // @Success 200 {object} models.SingleGroup
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/groups/{id} [get]
 func (a *App) getSingleGroup(w http.ResponseWriter, r *http.Request) {
 

@@ -17,6 +17,10 @@ import (
 // @Produce  json
 // @Param page query string false "Page number"
 // @Success 200 {object} []models.Ticket
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/tickets [get]
 func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 
@@ -54,6 +58,10 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path string false "Enter ticket id"
 // @Success 200 {object} models.Ticket
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/tickets/{id} [get]
 func (a *App) getSingleTicket(w http.ResponseWriter, r *http.Request) {
 
@@ -87,6 +95,10 @@ func (a *App) getSingleTicket(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param text body models.Ticket false "Enter ticket properties"
 // @Success 200 {object} string
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/tickets [post]
 func (a *App) createTicket(w http.ResponseWriter, r *http.Request) {
 
@@ -121,6 +133,10 @@ func (a *App) createTicket(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path string true "Enter ticket id"
 // @Success 200 {object} object
+// @Failure      400  {object} string "bad request"
+// @Failure      403  {object}  string "permission denied"
+// @Failure      404  {object}  string "not found"
+// @Failure      500  {object}  string "internal server error"
 // @Router /api/v2/tickets/{id} [delete]
 func (a *App) deleteTicket(w http.ResponseWriter, r *http.Request) {
 

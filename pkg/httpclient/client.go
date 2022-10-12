@@ -5,10 +5,12 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/kosha/freshservice-connector/pkg/models"
 	"io/ioutil"
 	"net/http"
 	neturl "net/url"
+	"strings"
+
+	"github.com/kosha/freshservice-connector/pkg/models"
 )
 
 func basicAuth(username, password string) string {
@@ -21,6 +23,7 @@ func makeHttpReq(apiKey string, req *http.Request) []byte {
 	client := &http.Client{}
 
 	resp, err := client.Do(req)
+
 	if err != nil {
 		fmt.Println(err)
 		return nil
@@ -32,11 +35,43 @@ func makeHttpReq(apiKey string, req *http.Request) []byte {
 	return bodyBytes
 }
 
-func GetAllTickets(url string, apiKey, pageNum string) *models.Tickets {
+func getPageCount(apiKey string, path string) int {
+	pageCount := 0
+	for ok := true; ok; ok = pageCount > 0 {
+		pageCount += 1
+		req, err := http.NewRequest("GET", path, nil)
+		if err != nil {
+			return 0
+		}
+
+		req.Header.Add("Authorization", "Basic "+basicAuth(apiKey, "X"))
+		client := &http.Client{}
+
+		resp, err := client.Do(req)
+		if err != nil {
+			return 0
+		}
+		defer resp.Body.Close()
+
+		if len(resp.Header.Values("Link")) == 0 {
+			return pageCount
+		} else {
+			link := strings.Split(resp.Header.Values("Link")[0], ";")
+			path = strings.Trim(strings.Trim(link[0], "<"), ">")
+		}
+	}
+	return 0
+}
+
+func GetAllTickets(url string, apiKey, pageNum string, getNumPages bool) (int, *models.Tickets) {
+	if getNumPages {
+		return getPageCount(apiKey, url+"/api/v2/tickets?page="+pageNum), nil
+	}
+
 	req, err := http.NewRequest("GET", url+"/api/v2/tickets?page="+pageNum, nil)
-	fmt.Println(url + "/api/v2/tickets?page=" + pageNum)
+
 	if err != nil {
-		return nil
+		return 0, nil
 	}
 	var tickets models.Tickets
 
@@ -45,9 +80,9 @@ func GetAllTickets(url string, apiKey, pageNum string) *models.Tickets {
 	// Convert response body to target struct
 	err = json.Unmarshal(res, &tickets)
 	if err != nil {
-		return nil
+		return 0, nil
 	}
-	return &tickets
+	return 0, &tickets
 }
 
 func GetAgents(url string, apiKey string) *models.Agents {
@@ -392,12 +427,22 @@ func CreateTicket(url, apiKey string, ticket *models.Ticket) (*models.Ticket, er
 	if err != nil {
 		return nil, err
 	}
+
 	req, err := http.NewRequest("POST", url+"/api/v2/tickets", bytes.NewBuffer(jsonReq))
+	if err != nil {
+		return nil, err
+	}
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
 
 	resp := makeHttpReq(apiKey, req)
+	fmt.Println(string(resp))
+
 	var ticket1 *models.Ticket
-	_ = json.Unmarshal(resp, &ticket1)
+	err = json.Unmarshal(resp, &ticket1)
+
+	if err != nil {
+		return nil, err
+	}
 	return ticket1, nil
 }
 

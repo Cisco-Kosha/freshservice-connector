@@ -2,11 +2,12 @@ package app
 
 import (
 	"encoding/json"
-	"fmt"
+	"net/http"
+	"strconv"
+
 	"github.com/gorilla/mux"
 	"github.com/kosha/freshservice-connector/pkg/httpclient"
 	"github.com/kosha/freshservice-connector/pkg/models"
-	"net/http"
 )
 
 // getAllTickets godoc
@@ -16,6 +17,9 @@ import (
 // @Accept  json
 // @Produce  json
 // @Param page query string false "Page number"
+// @Param allPages query boolean false "Collates all pages"
+// @Param pageStart query integer false "First page to collate"
+// @Param pageEnd query integer false "Last page to collate"
 // @Success 200 {object} []models.Ticket
 // @Failure      400  {object} string "bad request"
 // @Failure      403  {object}  string "permission denied"
@@ -34,20 +38,54 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 		pageNum = "1"
 	}
 
-	t := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), pageNum)
-	fmt.Println(t)
-	for _, ticket := range t.Tickets {
-		status := ticket.Status.(float64)
-		ticket.Status = models.Status(status).String()
+	var tickets []*models.Tickets
 
-		priority := ticket.Priority.(float64)
-		ticket.Priority = models.Priority(priority).String()
+	numPages, _ := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), "1", true)
+	pageStart, pageEnd, err := getPageRange(r, numPages)
 
-		source := ticket.Source.(float64)
-		ticket.Source = models.Source(source).String()
+	if err != nil {
+		a.Log.Errorf("Error getting page range", err)
+		respondWithError(w, http.StatusBadRequest, err.Error())
+		return
 	}
 
-	respondWithJSON(w, http.StatusOK, t)
+	//get page data
+	for i := pageStart; i <= pageEnd; i++ {
+		_, t := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), strconv.Itoa(i), false)
+
+		for _, ticket := range t.Tickets {
+			status := ticket.Status.(float64)
+			ticket.Status = models.Status(status).String()
+
+			priority := ticket.Priority.(float64)
+			ticket.Priority = models.Priority(priority).String()
+
+			source := ticket.Source.(float64)
+			ticket.Source = models.Source(source).String()
+		}
+
+		tickets = append(tickets, t)
+	}
+
+	respondWithJSON(w, http.StatusOK, tickets)
+}
+
+// getAllTicketsMetadata godoc
+// @Summary Get number of pages
+// @Description Get page metadata for endpoint
+// @Tags tickets
+// @Accept  json
+// @Produce  json
+// @Success 200
+// @Router /api/v2/tickets/metadata [get]
+func (a *App) getAllTicketsMetadata(w http.ResponseWriter, r *http.Request) {
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "*")
+
+	numPages, _ := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), "1", true)
+	respondWithJSON(w, http.StatusOK, numPages)
 }
 
 // getSingleTicket godoc

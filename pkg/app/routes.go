@@ -13,6 +13,7 @@ func (a *App) initializeRoutes() {
 
 	// tickets routes
 	a.Router.HandleFunc(apiV2+"/tickets", a.getAllTickets).Methods("GET", "OPTIONS")
+	a.Router.HandleFunc(apiV2+"/tickets/metadata", a.getAllTicketsMetadata).Methods("GET", "OPTIONS")
 	a.Router.HandleFunc(apiV2+"/tickets/{id}", a.getSingleTicket).Methods("GET", "OPTIONS")
 	a.Router.HandleFunc(apiV2+"/tickets", a.createTicket).Methods("POST", "OPTIONS")
 	a.Router.HandleFunc(apiV2+"/tickets/{id}", a.deleteTicket).Methods("DELETE", "OPTIONS")

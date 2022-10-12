@@ -1,9 +1,10 @@
 package app
 
 import (
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/kosha/freshservice-connector/pkg/httpclient"
-	"net/http"
 )
 
 // getAgents godoc

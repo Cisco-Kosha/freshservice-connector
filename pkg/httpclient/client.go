@@ -5,12 +5,11 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/kosha/freshservice-connector/pkg/models"
 	"io/ioutil"
 	"net/http"
 	neturl "net/url"
-	"strings"
-
-	"github.com/kosha/freshservice-connector/pkg/models"
+	"strconv"
 )
 
 func basicAuth(username, password string) string {
@@ -35,10 +34,23 @@ func makeHttpReq(apiKey string, req *http.Request) []byte {
 	return bodyBytes
 }
 
-func getPageCount(apiKey string, path string) int {
+func getPageCount(apiKey string, url string) int {
 	pageCount := 0
-	for ok := true; ok; ok = pageCount > 0 {
-		pageCount += 1
+
+	N := 20000                // an exceedingly large number
+	mySlice := make([]int, N) // initialize an array with N
+	for i := 0; i < N; i++ {
+		mySlice[i] = i
+	}
+
+	// binary search algorithm logic to find the pageCount variable
+	low := 0
+	high := N - 1
+
+	for low <= high {
+		median := (low + high) / 2
+
+		path := url + "/api/v2/tickets?page=" + strconv.Itoa(median)
 		req, err := http.NewRequest("GET", path, nil)
 		if err != nil {
 			return 0
@@ -53,19 +65,27 @@ func getPageCount(apiKey string, path string) int {
 		}
 		defer resp.Body.Close()
 
-		if len(resp.Header.Values("Link")) == 0 {
-			return pageCount
+		bodyBytes, _ := ioutil.ReadAll(resp.Body)
+		var tickets models.Tickets
+		// Convert response body to target struct
+		_ = json.Unmarshal(bodyBytes, &tickets)
+
+		if len(tickets.Tickets) == 0 && len(resp.Header.Values("Link")) == 0 {
+			high = median - 1
+		} else if len(resp.Header.Values("Link")) == 0 {
+			pageCount = median
+			break
 		} else {
-			link := strings.Split(resp.Header.Values("Link")[0], ";")
-			path = strings.Trim(strings.Trim(link[0], "<"), ">")
+			low = median + 1
 		}
 	}
-	return 0
+	return pageCount
 }
 
 func GetAllTickets(url string, apiKey, pageNum string, getNumPages bool) (int, *models.Tickets) {
 	if getNumPages {
-		return getPageCount(apiKey, url+"/api/v2/tickets?page="+pageNum), nil
+		res := getPageCount(apiKey, url)
+		return res, nil
 	}
 
 	req, err := http.NewRequest("GET", url+"/api/v2/tickets?page="+pageNum, nil)

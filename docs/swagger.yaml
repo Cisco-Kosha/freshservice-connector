@@ -980,6 +980,18 @@ paths:
         in: query
         name: page
         type: string
+      - description: Collates all pages
+        in: query
+        name: allPages
+        type: boolean
+      - description: First page to collate
+        in: query
+        name: pageStart
+        type: integer
+      - description: Last page to collate
+        in: query
+        name: pageEnd
+        type: integer
       produces:
       - application/json
       responses:
@@ -1114,6 +1126,19 @@ paths:
           schema:
             type: string
       summary: Get single ticket
+      tags:
+      - tickets
+  /api/v2/tickets/metadata:
+    get:
+      consumes:
+      - application/json
+      description: Get page metadata for endpoint
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get number of pages
       tags:
       - tickets
 swagger: "2.0"

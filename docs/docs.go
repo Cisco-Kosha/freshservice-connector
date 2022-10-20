@@ -863,6 +863,24 @@ const docTemplate = `{
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Collates all pages",
+                        "name": "allPages",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "First page to collate",
+                        "name": "pageStart",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Last page to collate",
+                        "name": "pageEnd",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -953,6 +971,26 @@ const docTemplate = `{
                         "schema": {
                             "type": "string"
                         }
+                    }
+                }
+            }
+        },
+        "/api/v2/tickets/metadata": {
+            "get": {
+                "description": "Get page metadata for endpoint",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tickets"
+                ],
+                "summary": "Get number of pages",
+                "responses": {
+                    "200": {
+                        "description": "OK"
                     }
                 }
             }

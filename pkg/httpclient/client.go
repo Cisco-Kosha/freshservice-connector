@@ -5,11 +5,12 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/kosha/freshservice-connector/pkg/models"
 	"io/ioutil"
 	"net/http"
 	neturl "net/url"
 	"strconv"
+
+	"github.com/kosha/freshservice-connector/pkg/models"
 )
 
 func basicAuth(username, password string) string {
@@ -27,21 +28,16 @@ func makeHttpReq(apiKey string, req *http.Request) []byte {
 		fmt.Println(err)
 		return nil
 	}
-
 	defer resp.Body.Close()
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 
 	return bodyBytes
 }
 
-func getPageCount(apiKey string, url string) int {
+func getPageCount(apiKey string, url string, perPage string) int {
 	pageCount := 0
 
-	N := 20000                // an exceedingly large number
-	mySlice := make([]int, N) // initialize an array with N
-	for i := 0; i < N; i++ {
-		mySlice[i] = i
-	}
+	N := 20000 // an exceedingly large number
 
 	// binary search algorithm logic to find the pageCount variable
 	low := 0
@@ -50,7 +46,7 @@ func getPageCount(apiKey string, url string) int {
 	for low <= high {
 		median := (low + high) / 2
 
-		path := url + "/api/v2/tickets?page=" + strconv.Itoa(median)
+		path := url + "/api/v2/tickets?page=" + strconv.Itoa(median) + "&per_page=" + perPage
 		req, err := http.NewRequest("GET", path, nil)
 		if err != nil {
 			return 0
@@ -82,27 +78,45 @@ func getPageCount(apiKey string, url string) int {
 	return pageCount
 }
 
-func GetAllTickets(url string, apiKey, pageNum string, getNumPages bool) (int, *models.Tickets) {
+func GetAllTickets(url string, apiKey, pageNum string, perPage string, getNumPages bool) (int, bool, *models.Tickets) {
+	isNextPage := false
+
 	if getNumPages {
-		res := getPageCount(apiKey, url)
-		return res, nil
+		res := getPageCount(apiKey, url, perPage)
+		return res, false, nil
 	}
 
-	req, err := http.NewRequest("GET", url+"/api/v2/tickets?page="+pageNum, nil)
+	req, err := http.NewRequest("GET", url+"/api/v2/tickets?page="+pageNum+"&per_page="+perPage, nil)
 
 	if err != nil {
-		return 0, nil
+		return 0, false, nil
 	}
 	var tickets models.Tickets
 
-	res := makeHttpReq(apiKey, req)
+	req.Header.Add("Authorization", "Basic "+basicAuth(apiKey, "X"))
+	client := &http.Client{}
+
+	resp, err := client.Do(req)
+	fmt.Println(resp.Header)
+
+	if len(resp.Header.Values("Link")) != 0 {
+		isNextPage = true
+	}
+
+	if err != nil {
+		fmt.Println(err)
+		return 0, false, nil
+	}
+
+	defer resp.Body.Close()
+	res, _ := ioutil.ReadAll(resp.Body)
 
 	// Convert response body to target struct
 	err = json.Unmarshal(res, &tickets)
 	if err != nil {
-		return 0, nil
+		return 0, false, nil
 	}
-	return 0, &tickets
+	return 0, isNextPage, &tickets
 }
 
 func GetAgents(url string, apiKey string) *models.Agents {

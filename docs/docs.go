@@ -865,12 +865,6 @@ const docTemplate = `{
                         "in": "query"
                     },
                     {
-                        "type": "boolean",
-                        "description": "Collates all pages",
-                        "name": "allPages",
-                        "in": "query"
-                    },
-                    {
                         "type": "integer",
                         "description": "First page to collate",
                         "name": "pageStart",
@@ -880,6 +874,12 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "Last page to collate",
                         "name": "pageEnd",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of entries per page",
+                        "name": "perPage",
                         "in": "query"
                     }
                 ],
@@ -988,6 +988,14 @@ const docTemplate = `{
                     "tickets"
                 ],
                 "summary": "Get number of pages",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Number of entries per page",
+                        "name": "perPage",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"

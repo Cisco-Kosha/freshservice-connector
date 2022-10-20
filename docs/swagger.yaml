@@ -980,10 +980,6 @@ paths:
         in: query
         name: page
         type: string
-      - description: Collates all pages
-        in: query
-        name: allPages
-        type: boolean
       - description: First page to collate
         in: query
         name: pageStart
@@ -991,6 +987,10 @@ paths:
       - description: Last page to collate
         in: query
         name: pageEnd
+        type: integer
+      - description: Number of entries per page
+        in: query
+        name: perPage
         type: integer
       produces:
       - application/json
@@ -1133,6 +1133,11 @@ paths:
       consumes:
       - application/json
       description: Get page metadata for endpoint
+      parameters:
+      - description: Number of entries per page
+        in: query
+        name: perPage
+        type: integer
       produces:
       - application/json
       responses:

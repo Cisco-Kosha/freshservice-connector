@@ -1054,14 +1054,6 @@
             }
           },
           {
-            "description": "Collates all pages",
-            "in": "query",
-            "name": "allPages",
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
             "description": "First page to collate",
             "in": "query",
             "name": "pageStart",
@@ -1073,6 +1065,14 @@
             "description": "Last page to collate",
             "in": "query",
             "name": "pageEnd",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of entries per page",
+            "in": "query",
+            "name": "perPage",
             "schema": {
               "type": "integer"
             }
@@ -1211,6 +1211,16 @@
     },
     "/api/v2/tickets/metadata": {
       "get": {
+        "parameters": [
+          {
+            "description": "Number of entries per page",
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

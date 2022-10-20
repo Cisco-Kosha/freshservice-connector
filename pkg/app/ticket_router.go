@@ -2,6 +2,7 @@ package app
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -17,9 +18,9 @@ import (
 // @Accept  json
 // @Produce  json
 // @Param page query string false "Page number"
-// @Param allPages query boolean false "Collates all pages"
 // @Param pageStart query integer false "First page to collate"
 // @Param pageEnd query integer false "Last page to collate"
+// @Param perPage query integer false "Number of entries per page"
 // @Success 200 {object} []models.Ticket
 // @Failure      400  {object} string "bad request"
 // @Failure      403  {object}  string "permission denied"
@@ -38,10 +39,49 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 		pageNum = "1"
 	}
 
+	pageStart := 1
+	pageEnd := 1
+	var perPage string
+	var allPages bool
+	var err error
+
 	var tickets []*models.Tickets
 
-	numPages, _ := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), "1", true)
-	pageStart, pageEnd, err := getPageRange(r, numPages)
+	if r.FormValue("page") != "" {
+		pageStart, _ = strconv.Atoi(r.FormValue("page"))
+		pageEnd, _ = strconv.Atoi(r.FormValue("page"))
+	}
+
+	if r.FormValue("pageStart") != "" {
+		pageStart, err = strconv.Atoi(r.FormValue("pageStart"))
+		pageEnd = pageStart
+	}
+
+	if r.FormValue("pageEnd") != "" {
+		pageEnd, err = strconv.Atoi(r.FormValue("pageEnd"))
+	}
+
+	fmt.Println(r.FormValue("allPages"))
+	if r.FormValue("allPages") == "true" {
+		allPages = true
+	}
+
+	if r.FormValue("perPage") != "" {
+		perPage = r.FormValue("perPage")
+	} else {
+		perPage = "30"
+	}
+
+	if pageEnd-pageStart > 100 {
+		respondWithError(w, http.StatusBadRequest, "Freshservice connector rate limiting is restricted to 100 pages. Please limit page range.")
+		return
+	}
+
+	perPageInt, _ := strconv.Atoi(perPage)
+	if perPageInt > 100 {
+		respondWithError(w, http.StatusBadRequest, "Freshservice restricts entries per page to 100. Please limit perPage value.")
+		return
+	}
 
 	if err != nil {
 		a.Log.Errorf("Error getting page range", err)
@@ -49,9 +89,14 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//get page data
 	for i := pageStart; i <= pageEnd; i++ {
-		_, t := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), strconv.Itoa(i), false)
+		_, isNextPage, t := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), strconv.Itoa(i), perPage, false)
+
+		if t == nil {
+			a.Log.Errorf("Error fetching tickets", err)
+			respondWithError(w, http.StatusBadRequest, err.Error())
+			return
+		}
 
 		for _, ticket := range t.Tickets {
 			status := ticket.Status.(float64)
@@ -65,6 +110,11 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 		}
 
 		tickets = append(tickets, t)
+
+		if allPages && isNextPage {
+			pageEnd += 1
+		}
+
 	}
 
 	respondWithJSON(w, http.StatusOK, tickets)
@@ -76,6 +126,7 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 // @Tags tickets
 // @Accept  json
 // @Produce  json
+// @Param perPage query integer false "Number of entries per page"
 // @Success 200
 // @Router /api/v2/tickets/metadata [get]
 func (a *App) getAllTicketsMetadata(w http.ResponseWriter, r *http.Request) {
@@ -84,7 +135,15 @@ func (a *App) getAllTicketsMetadata(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
 
-	numPages, _ := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), "1", true)
+	var perPage string
+
+	if r.FormValue("perPage") != "" {
+		perPage = r.FormValue("perPage")
+	} else {
+		perPage = "30"
+	}
+
+	numPages, _, _ := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), "1", perPage, true)
 	respondWithJSON(w, http.StatusOK, numPages)
 }
 

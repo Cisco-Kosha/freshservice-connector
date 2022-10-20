@@ -34,3 +34,9 @@ logs
 pids
 *.pid
 *.seed
+swag
+
+# Node Modules
+node_modules/
+package*.json
+

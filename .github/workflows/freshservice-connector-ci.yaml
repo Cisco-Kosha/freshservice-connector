@@ -5,10 +5,13 @@ on:
     branches:
     - main
     - 'releases/**'
+    tags:
+      - '*'
   pull_request:
     branches:
     - main
     - 'releases/**'
+    - '*'
   
 env:
   REGISTRY: docker.io
@@ -28,6 +31,9 @@ jobs:
 
     - name: Build
       run: go build -v ./...
+      
+    - name: Import and Tidy 
+      run: go get -u && go mod tidy
 
     - name: Test
       run: go test -v ./...

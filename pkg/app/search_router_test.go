@@ -1,18 +1,35 @@
-package main
+package app
 
 import (
-	"github.com/Cisco-Kosha/freshservice-connector/pkg/app"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
-func TestGetRequest(t *testing.T) {
-	t.Parallel()
-	r, _ := http.NewRequest("GET", "/api/v2/agents", nil)
-	w := httptest.NewRecorder()
-	a := app.App{}
-	a.searchTickets(w,r)
-	assert.Equal(t, http.StatusOK, w.Code)
+func checkError(err error, t *testing.T) {
+	if err != nil {
+		t.Errorf("An error occurred. %v", err)
+	}
+}
+
+
+func (a *App) TestArticlesHandler(t *testing.T) {
+
+	req, err := http.NewRequest("GET", "/api/v2/specification/list", nil)
+
+	checkError(err, t)
+
+	rr := httptest.NewRecorder()
+
+	http.HandlerFunc(a.listConnectorSpecification).
+		ServeHTTP(rr, req)
+
+	//Confirm the response has the right status code
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("Status code differs. Expected %d .\n Got %d instead", http.StatusOK, status)
+	}
+
+	assert.Equal(t, http.StatusOK, rr.Code)
+
 }

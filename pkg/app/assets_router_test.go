@@ -8,27 +8,26 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
 )
 
-
-func TestGetProblems(t *testing.T) {
+func TestGetAssets(t *testing.T) {
 	// build our response JSON
 	expectedserverresponse := `{
-  "problems": [
+  "assets": [
     {
-      "id": 1,
-      "requester_id": 27002251944,
-      "description": "<div>Hi guys, <br/><br/>We have been facing issues when we try to reach Email Server 3. Looks like there is something wrong here.<br/><br/>Regards<br/> Rachel<br/> </div> ",
-      "due_by": "2022-11-02T02:53:43Z",
-      "subject": "Unable to reach email server",
-      "priority": 1,
-      "impact": 1,
-      "status": 1,
-      "created_at": "2022-10-19T02:53:43Z",
-      "updated_at": "2022-10-19T02:53:43Z"
-    }
-  ]
-}`
+      "id": 27001019809,
+      "display_id": 3,
+      "name": "Logitech Mouse",
+      "asset_type_id": 27002275571,
+      "impact": "low",
+      "author_type": "User",
+      "usage_type": "permanent",
+      "asset_tag": "ASSET-3",
+      "created_at": "2022-10-19T02:53:47Z",
+      "updated_at": "2022-10-19T02:53:47Z"
+    }]}
+`
 	// create a new server with that JSON
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
@@ -39,12 +38,12 @@ func TestGetProblems(t *testing.T) {
 		w.Write([]byte(expectedserverresponse))
 	}))
 	defer server.Close()
-	groups := httpclient.GetProblems(server.URL + "/api/v2/groups", "foobar-test-api-key")
+	groups := httpclient.GetAssets(server.URL+"/api/v2/agents", "foobar-test-api-key")
 	bytes, err := json.Marshal(groups)
-	var getProblems []models.Problems
-	json.Unmarshal(bytes, &getProblems)
+	var getAssets []models.Assets
+	json.Unmarshal(bytes, &getAssets)
 	assert.Equal(t, nil, err)
-	if bytes == nil{
+	if bytes == nil {
 		t.Error("GetGroups API Test Fail")
 	}
 }

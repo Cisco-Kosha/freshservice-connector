@@ -29,4 +29,5 @@ func TestSearchResults(t *testing.T) {
 	var getSearchResults []models.SearchResults
 	json.Unmarshal(bytes, &getSearchResults)
 	assert.Equal(t, nil, err)
+	t.Log("Test Execution of Get Search Completed")
 }

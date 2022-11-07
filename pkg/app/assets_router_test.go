@@ -46,4 +46,5 @@ func TestGetAssets(t *testing.T) {
 	if bytes == nil {
 		t.Error("GetGroups API Test Fail")
 	}
+	t.Log("Test Execution of Get Assets Completed")
 }

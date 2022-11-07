@@ -47,6 +47,7 @@ func TestGetGroups(t *testing.T) {
 	if bytes == nil{
 		t.Error("GetGroups API Test Fail")
 	}
+	t.Log("Test Execution of Get Groups Completed")
 }
 
 func AssertEqual(t *testing.T, a interface{}, b interface{}) {

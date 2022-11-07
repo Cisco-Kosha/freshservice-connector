@@ -29,4 +29,5 @@ func TestGetTickets(t *testing.T) {
 	var getTickets []models.Tickets
 	json.Unmarshal(bytes, &getTickets)
 	assert.Equal(t, nil, err)
+	t.Log("Test Execution of Get Tickets Completed")
 }

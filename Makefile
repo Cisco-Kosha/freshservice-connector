@@ -33,3 +33,4 @@ vet:
 	go vet
 
 all: hello build
+

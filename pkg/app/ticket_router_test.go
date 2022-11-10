@@ -1,22 +1,22 @@
 package app
 
 import (
-"encoding/json"
-"github.com/kosha/freshservice-connector/pkg/httpclient"
-"github.com/kosha/freshservice-connector/pkg/models"
-"github.com/stretchr/testify/assert"
-"net/http"
-"net/http/httptest"
-"testing"
+	"encoding/json"
+	"github.com/kosha/freshservice-connector/pkg/httpclient"
+	"github.com/kosha/freshservice-connector/pkg/models"
+	"github.com/stretchr/testify/assert"
+	"net/http"
+	"net/http/httptest"
+	"testing"
 
 )
 
-func TestSearchResults(t *testing.T) {
+func TestGetTickets(t *testing.T) {
 	// build our response JSON
-	expectedserverresponse := `{}`
+	expectedserverresponse := ``
 	// create a new server with that JSON
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(404)
+		w.WriteHeader(200)
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Headers", "*")
 		w.Header().Set("Access-Control-Allow-Methods", "*")
@@ -24,10 +24,10 @@ func TestSearchResults(t *testing.T) {
 		w.Write([]byte(expectedserverresponse))
 	}))
 	defer server.Close()
-	groups := httpclient.SearchTickets(server.URL+"api/v2/search", "foobar-test-api-key", "12345", "12")
+	groups := httpclient.GetSingleTicket(server.URL+"api/v2/tickets", "1", "foobar-api-key")
 	bytes, err := json.Marshal(groups)
-	var getSearchResults []models.SearchResults
-	json.Unmarshal(bytes, &getSearchResults)
+	var getTickets []models.Tickets
+	json.Unmarshal(bytes, &getTickets)
 	assert.Equal(t, nil, err)
-	t.Log("Test Execution of Get Search Completed")
+	t.Log("Test Execution of Get Tickets Completed")
 }

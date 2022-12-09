@@ -25,7 +25,7 @@ type Agent struct {
 	ExternalID         interface{}   `json:"external_id,omitempty"`
 	FirstName          string        `json:"first_name,omitempty"`
 	HasLoggedIn        bool          `json:"has_logged_in,omitempty"`
-	ID                 int64         `json:"id,omitempty"`
+	ID                 int64         `json:"id,omitempty" format:"int64"`
 	JobTitle           interface{}   `json:"job_title,omitempty"`
 	Language           string        `json:"language,omitempty"`
 	LastActiveAt       *time.Time    `json:"last_active_at,omitempty"`
@@ -35,9 +35,9 @@ type Agent struct {
 	MobilePhoneNumber  interface{}   `json:"mobile_phone_number,omitempty"`
 	Occasional         bool          `json:"occasional,omitempty"`
 	ReportingManagerID interface{}   `json:"reporting_manager_id,omitempty"`
-	RoleIds            []int64       `json:"role_ids,omitempty"`
+	RoleIds            []int64       `json:"role_ids,omitempty" format:"int64"`
 	Roles              []struct {
-		RoleID          int64         `json:"role_id,omitempty"`
+		RoleID          int64         `json:"role_id,omitempty" format:"int64"`
 		AssignmentScope string        `json:"assignment_scope,omitempty"`
 		Groups          []interface{} `json:"groups,omitempty"`
 	} `json:"roles,omitempty"`

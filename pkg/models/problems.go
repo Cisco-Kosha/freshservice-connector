@@ -11,9 +11,9 @@ type SingleProblem struct {
 }
 
 type Problem struct {
-	ID              int           `json:"id,omitempty"`
+	ID              int64         `json:"id,omitempty" format:"int64"`
 	AgentID         interface{}   `json:"agent_id,omitempty"`
-	RequesterID     int           `json:"requester_id,omitempty"`
+	RequesterID     int64         `json:"requester_id,omitempty" format:"int64"`
 	Description     string        `json:"description,omitempty"`
 	DescriptionText string        `json:"description_text,omitempty"`
 	DueBy           *time.Time    `json:"due_by,omitempty"`

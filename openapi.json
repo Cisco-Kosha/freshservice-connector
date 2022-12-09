@@ -1417,6 +1417,7 @@
             "type": "boolean"
           },
           "id": {
+            "format": "int64",
             "type": "integer"
           },
           "job_title": {},
@@ -1456,6 +1457,7 @@
           "reporting_manager_id": {},
           "role_ids": {
             "items": {
+              "format": "int64",
               "type": "integer"
             },
             "type": "array"
@@ -1471,6 +1473,7 @@
                   "type": "array"
                 },
                 "role_id": {
+                  "format": "int64",
                   "type": "integer"
                 }
               },
@@ -1546,6 +1549,7 @@
             "type": "string"
           },
           "asset_type_id": {
+            "format": "int64",
             "type": "integer"
           },
           "assigned_on": {},
@@ -1558,10 +1562,12 @@
           "department_id": {},
           "description": {},
           "display_id": {
+            "format": "int64",
             "type": "integer"
           },
           "group_id": {},
           "id": {
+            "format": "int64",
             "type": "integer"
           },
           "impact": {
@@ -1610,6 +1616,7 @@
         "properties": {
           "agent_ids": {
             "items": {
+              "format": "int64",
               "type": "integer"
             },
             "type": "array"
@@ -1628,9 +1635,11 @@
             "type": "string"
           },
           "escalate_to": {
+            "format": "int64",
             "type": "integer"
           },
           "id": {
+            "format": "int64",
             "type": "integer"
           },
           "leaders": {
@@ -1643,6 +1652,7 @@
           },
           "members": {
             "items": {
+              "format": "int64",
               "type": "integer"
             },
             "type": "array"
@@ -1656,6 +1666,7 @@
           },
           "observers": {
             "items": {
+              "format": "int64",
               "type": "integer"
             },
             "type": "array"
@@ -1740,6 +1751,7 @@
           },
           "group_id": {},
           "id": {
+            "format": "int64",
             "type": "integer"
           },
           "impact": {
@@ -1753,6 +1765,7 @@
           },
           "priority": {},
           "requester_id": {
+            "format": "int64",
             "type": "integer"
           },
           "status": {},
@@ -1785,6 +1798,7 @@
             "type": "string"
           },
           "id": {
+            "format": "int64",
             "type": "integer"
           },
           "mobile": {
@@ -1927,6 +1941,7 @@
           },
           "group_id": {},
           "id": {
+            "format": "int64",
             "type": "integer"
           },
           "is_escalated": {
@@ -1943,12 +1958,14 @@
             "type": "array"
           },
           "requested_for_id": {
+            "format": "int64",
             "type": "integer"
           },
           "requester": {
             "$ref": "#/components/schemas/models.Requester"
           },
           "requester_id": {
+            "format": "int64",
             "type": "integer"
           },
           "responder_id": {},

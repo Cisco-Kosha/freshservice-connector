@@ -29,6 +29,7 @@ definitions:
       has_logged_in:
         type: boolean
       id:
+        format: int64
         type: integer
       job_title: {}
       language:
@@ -58,6 +59,7 @@ definitions:
       reporting_manager_id: {}
       role_ids:
         items:
+          format: int64
           type: integer
         type: array
       roles:
@@ -69,6 +71,7 @@ definitions:
               items: {}
               type: array
             role_id:
+              format: int64
               type: integer
           type: object
         type: array
@@ -120,6 +123,7 @@ definitions:
       asset_tag:
         type: string
       asset_type_id:
+        format: int64
         type: integer
       assigned_on: {}
       author_type:
@@ -129,9 +133,11 @@ definitions:
       department_id: {}
       description: {}
       display_id:
+        format: int64
         type: integer
       group_id: {}
       id:
+        format: int64
         type: integer
       impact:
         type: string
@@ -164,6 +170,7 @@ definitions:
     properties:
       agent_ids:
         items:
+          format: int64
           type: integer
         type: array
       approval_required:
@@ -176,8 +183,10 @@ definitions:
       description:
         type: string
       escalate_to:
+        format: int64
         type: integer
       id:
+        format: int64
         type: integer
       leaders:
         items: {}
@@ -187,6 +196,7 @@ definitions:
         type: array
       members:
         items:
+          format: int64
           type: integer
         type: array
       members_pending_approval:
@@ -196,6 +206,7 @@ definitions:
         type: string
       observers:
         items:
+          format: int64
           type: integer
         type: array
       observers_pending_approval:
@@ -252,6 +263,7 @@ definitions:
         type: string
       group_id: {}
       id:
+        format: int64
         type: integer
       impact:
         type: integer
@@ -261,6 +273,7 @@ definitions:
         type: boolean
       priority: {}
       requester_id:
+        format: int64
         type: integer
       status: {}
       sub_category:
@@ -282,6 +295,7 @@ definitions:
       email:
         type: string
       id:
+        format: int64
         type: integer
       mobile:
         type: integer
@@ -375,6 +389,7 @@ definitions:
         type: array
       group_id: {}
       id:
+        format: int64
         type: integer
       is_escalated:
         type: boolean
@@ -387,10 +402,12 @@ definitions:
         items: {}
         type: array
       requested_for_id:
+        format: int64
         type: integer
       requester:
         $ref: '#/definitions/models.Requester'
       requester_id:
+        format: int64
         type: integer
       responder_id: {}
       source: {}
@@ -1142,7 +1159,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: ""
       summary: Get number of pages
       tags:
       - tickets

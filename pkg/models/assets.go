@@ -11,11 +11,11 @@ type SingleAsset struct {
 }
 
 type Asset struct {
-	ID           int64       `json:"id,omitempty"`
-	DisplayID    int         `json:"display_id,omitempty"`
+	ID           int64       `json:"id,omitempty" format:"int64"`
+	DisplayID    int64       `json:"display_id,omitempty" format:"int64"`
 	Name         string      `json:"name,omitempty"`
 	Description  interface{} `json:"description,omitempty"`
-	AssetTypeID  int64       `json:"asset_type_id,omitempty"`
+	AssetTypeID  int64       `json:"asset_type_id,omitempty" format:"int64"`
 	Impact       string      `json:"impact,omitempty"`
 	AuthorType   string      `json:"author_type,omitempty"`
 	UsageType    string      `json:"usage_type,omitempty"`

@@ -17,7 +17,7 @@ type Ticket struct {
 	Category               interface{}   `json:"category,omitempty"`
 	SubCategory            interface{}   `json:"sub_category,omitempty"`
 	ItemCategory           interface{}   `json:"item_category,omitempty"`
-	RequesterID            int64         `json:"requester_id,omitempty"`
+	RequesterID            int64         `json:"requester_id,omitempty" format:"int64"`
 	ResponderID            interface{}   `json:"responder_id,omitempty"`
 	DueBy                  *time.Time    `json:"due_by,omitempty"`
 	FrEscalated            bool          `json:"fr_escalated,omitempty"`
@@ -29,13 +29,13 @@ type Ticket struct {
 	CcEmails               []interface{} `json:"cc_emails,omitempty"`
 	IsEscalated            bool          `json:"is_escalated,omitempty"`
 	FrDueBy                *time.Time    `json:"fr_due_by,omitempty"`
-	ID                     int           `json:"id,omitempty"`
+	ID                     int64         `json:"id,omitempty" format:"int64"`
 	Priority               interface{}   `json:"priority,omitempty"`
 	Status                 interface{}   `json:"status,omitempty"`
 	Source                 interface{}   `json:"source,omitempty"`
 	CreatedAt              *time.Time    `json:"created_at,omitempty"`
 	UpdatedAt              *time.Time    `json:"updated_at,omitempty"`
-	RequestedForID         int64         `json:"requested_for_id,omitempty"`
+	RequestedForID         int64         `json:"requested_for_id,omitempty" format:"int64"`
 	ToEmails               interface{}   `json:"to_emails,omitempty"`
 	Type                   string        `json:"type,omitempty"`
 	Description            string        `json:"description,omitempty"`
@@ -53,7 +53,7 @@ type Ticket struct {
 }
 
 type Requester struct {
-	ID     int64  `json:"id,omitempty"`
+	ID     int64  `json:"id,omitempty" format:"int64"`
 	Name   string `json:"name,omitempty"`
 	Email  string `json:"email,omitempty"`
 	Mobile int64  `json:"mobile,omitempty"`
@@ -115,10 +115,10 @@ type Conversation struct {
 	Private      bool          `json:"private,omitempty"`
 	CreatedAt    time.Time     `json:"created_at,omitempty"`
 	UpdatedAt    time.Time     `json:"updated_at,omitempty"`
-	UserID       int           `json:"user_id,omitempty"`
+	UserID       int64         `json:"user_id,omitempty" format:"int64"`
 	SupportEmail interface{}   `json:"support_email,omitempty"`
-	Source       int           `json:"source,omitempty"`
-	TicketID     int           `json:"ticket_id,omitempty"`
+	Source       int64         `json:"source,omitempty" format:"int64"`
+	TicketID     int64         `json:"ticket_id,omitempty" format:"int64"`
 	ToEmails     []interface{} `json:"to_emails,omitempty"`
 	FromEmail    interface{}   `json:"from_email,omitempty"`
 	CcEmails     []interface{} `json:"cc_emails,omitempty"`

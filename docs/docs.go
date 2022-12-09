@@ -998,7 +998,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": ""
                     }
                 }
             }
@@ -1154,7 +1154,8 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "job_title": {},
                 "language": {
@@ -1194,7 +1195,8 @@ const docTemplate = `{
                 "role_ids": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "roles": {
@@ -1210,7 +1212,8 @@ const docTemplate = `{
                                 "items": {}
                             },
                             "role_id": {
-                                "type": "integer"
+                                "type": "integer",
+                                "format": "int64"
                             }
                         }
                     }
@@ -1283,7 +1286,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "asset_type_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "assigned_on": {},
                 "author_type": {
@@ -1295,11 +1299,13 @@ const docTemplate = `{
                 "department_id": {},
                 "description": {},
                 "display_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "group_id": {},
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "impact": {
                     "type": "string"
@@ -1348,7 +1354,8 @@ const docTemplate = `{
                 "agent_ids": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "approval_required": {
@@ -1365,10 +1372,12 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "escalate_to": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "leaders": {
                     "type": "array",
@@ -1381,7 +1390,8 @@ const docTemplate = `{
                 "members": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "members_pending_approval": {
@@ -1394,7 +1404,8 @@ const docTemplate = `{
                 "observers": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "observers_pending_approval": {
@@ -1477,7 +1488,8 @@ const docTemplate = `{
                 },
                 "group_id": {},
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "impact": {
                     "type": "integer"
@@ -1490,7 +1502,8 @@ const docTemplate = `{
                 },
                 "priority": {},
                 "requester_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "status": {},
                 "sub_category": {
@@ -1522,7 +1535,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "mobile": {
                     "type": "integer"
@@ -1658,7 +1672,8 @@ const docTemplate = `{
                 },
                 "group_id": {},
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "is_escalated": {
                     "type": "boolean"
@@ -1674,13 +1689,15 @@ const docTemplate = `{
                     "items": {}
                 },
                 "requested_for_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "requester": {
                     "$ref": "#/definitions/models.Requester"
                 },
                 "requester_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "responder_id": {},
                 "source": {},

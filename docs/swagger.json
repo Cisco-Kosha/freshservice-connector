@@ -991,7 +991,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": ""
                     }
                 }
             }
@@ -1147,7 +1147,8 @@
                     "type": "boolean"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "job_title": {},
                 "language": {
@@ -1187,7 +1188,8 @@
                 "role_ids": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "roles": {
@@ -1203,7 +1205,8 @@
                                 "items": {}
                             },
                             "role_id": {
-                                "type": "integer"
+                                "type": "integer",
+                                "format": "int64"
                             }
                         }
                     }
@@ -1276,7 +1279,8 @@
                     "type": "string"
                 },
                 "asset_type_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "assigned_on": {},
                 "author_type": {
@@ -1288,11 +1292,13 @@
                 "department_id": {},
                 "description": {},
                 "display_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "group_id": {},
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "impact": {
                     "type": "string"
@@ -1341,7 +1347,8 @@
                 "agent_ids": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "approval_required": {
@@ -1358,10 +1365,12 @@
                     "type": "string"
                 },
                 "escalate_to": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "leaders": {
                     "type": "array",
@@ -1374,7 +1383,8 @@
                 "members": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "members_pending_approval": {
@@ -1387,7 +1397,8 @@
                 "observers": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                     }
                 },
                 "observers_pending_approval": {
@@ -1470,7 +1481,8 @@
                 },
                 "group_id": {},
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "impact": {
                     "type": "integer"
@@ -1483,7 +1495,8 @@
                 },
                 "priority": {},
                 "requester_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "status": {},
                 "sub_category": {
@@ -1515,7 +1528,8 @@
                     "type": "string"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "mobile": {
                     "type": "integer"
@@ -1651,7 +1665,8 @@
                 },
                 "group_id": {},
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "is_escalated": {
                     "type": "boolean"
@@ -1667,13 +1682,15 @@
                     "items": {}
                 },
                 "requested_for_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "requester": {
                     "$ref": "#/definitions/models.Requester"
                 },
                 "requester_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "responder_id": {},
                 "source": {},

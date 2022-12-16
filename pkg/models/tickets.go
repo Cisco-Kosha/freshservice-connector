@@ -13,7 +13,8 @@ type SingleTicket struct {
 type Ticket struct {
 	Subject                string        `json:"subject,omitempty"`
 	GroupID                interface{}   `json:"group_id,omitempty"`
-	DepartmentID           interface{}   `json:"department_id,omitempty"`
+	DepartmentID           int64         `json:"department_id,omitempty" format:"int64"`
+	DepartmentName         string        `json:"department_name,omitempty"`
 	Category               interface{}   `json:"category,omitempty"`
 	SubCategory            interface{}   `json:"sub_category,omitempty"`
 	ItemCategory           interface{}   `json:"item_category,omitempty"`

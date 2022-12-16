@@ -190,6 +190,17 @@ func (a *App) getSingleTicket(w http.ResponseWriter, r *http.Request) {
 	source := t.Ticket.Source.(float64)
 	t.Ticket.Source = models.Source(source).String()
 
+	departmentId := t.Ticket.DepartmentID
+	if departmentId != 0 {
+		department := httpclient.GetDepartment(a.Cfg.GetFreshServiceURL(), departmentId, a.Cfg.GetApiKey())
+		if department != nil {
+			departmentName := department.Department.Name
+			if departmentName != "" {
+				t.Ticket.DepartmentName = departmentName
+			}
+		}
+	}
+
 	respondWithJSON(w, http.StatusOK, t)
 }
 

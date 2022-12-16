@@ -97,7 +97,6 @@ func GetAllTickets(url string, apiKey, pageNum string, perPage string, getNumPag
 	client := &http.Client{}
 
 	resp, err := client.Do(req)
-	fmt.Println(resp.Header)
 
 	if len(resp.Header.Values("Link")) != 0 {
 		isNextPage = true
@@ -137,6 +136,27 @@ func GetAgents(url string, apiKey string) *models.Agents {
 		return nil
 	}
 	return agents
+}
+
+func GetDepartment(url string, id int64, apiKey string) *models.Departments {
+
+	departmentId := strconv.Itoa(int(id))
+	req, err := http.NewRequest("GET", url+"/api/v2/departments/"+departmentId, nil)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	var department *models.Departments
+
+	res := makeHttpReq(apiKey, req)
+
+	// Convert response body to target struct
+	err = json.Unmarshal(res, &department)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	return department
 }
 
 func GetSingleAgent(url, id string, apiKey string) *models.SingleAgent {

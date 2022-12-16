@@ -2,7 +2,6 @@ package app
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -61,7 +60,6 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 		pageEnd, err = strconv.Atoi(r.FormValue("pageEnd"))
 	}
 
-	fmt.Println(r.FormValue("allPages"))
 	if r.FormValue("allPages") == "true" {
 		allPages = true
 	}
@@ -107,6 +105,17 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 
 			source := ticket.Source.(float64)
 			ticket.Source = models.Source(source).String()
+
+			departmentId := ticket.DepartmentID
+			if departmentId != 0 {
+				department := httpclient.GetDepartment(a.Cfg.GetFreshServiceURL(), departmentId, a.Cfg.GetApiKey())
+				if department != nil {
+					departmentName := department.Department.Name
+					if departmentName != "" {
+						ticket.DepartmentName = departmentName
+					}
+				}
+			}
 		}
 
 		tickets = append(tickets, t)

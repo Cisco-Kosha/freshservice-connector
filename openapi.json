@@ -1918,7 +1918,13 @@
           "deleted": {
             "type": "boolean"
           },
-          "department_id": {},
+          "department_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "department_name": {
+            "type": "string"
+          },
           "description": {
             "type": "string"
           },

@@ -1649,7 +1649,13 @@ const docTemplate = `{
                 "deleted": {
                     "type": "boolean"
                 },
-                "department_id": {},
+                "department_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "department_name": {
+                    "type": "string"
+                },
                 "description": {
                     "type": "string"
                 },

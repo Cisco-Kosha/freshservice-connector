@@ -34,6 +34,50 @@ func makeHttpReq(apiKey string, req *http.Request) []byte {
 	return bodyBytes
 }
 
+func getDepartmentsCount(apiKey string, url string, perPage string) int {
+	pageCount := 0
+
+	N := 100 // an exceedingly large number
+
+	// binary search algorithm logic to find the pageCount variable
+	low := 0
+	high := N - 1
+
+	for low <= high {
+		median := (low + high) / 2
+
+		path := url + "/api/v2/departments?page=" + strconv.Itoa(median) + "&per_page=" + perPage
+		req, err := http.NewRequest("GET", path, nil)
+		if err != nil {
+			return 0
+		}
+
+		req.Header.Add("Authorization", "Basic "+basicAuth(apiKey, "X"))
+		client := &http.Client{}
+
+		resp, err := client.Do(req)
+		if err != nil {
+			return 0
+		}
+		defer resp.Body.Close()
+
+		bodyBytes, _ := ioutil.ReadAll(resp.Body)
+		var departments models.Departments
+		// Convert response body to target struct
+		_ = json.Unmarshal(bodyBytes, &departments)
+
+		if len(departments.Departments) == 0 && len(resp.Header.Values("Link")) == 0 {
+			high = median - 1
+		} else if len(resp.Header.Values("Link")) == 0 {
+			pageCount = median
+			break
+		} else {
+			low = median + 1
+		}
+	}
+	return pageCount
+}
+
 func getPageCount(apiKey string, url string, perPage string) int {
 	pageCount := 0
 
@@ -138,9 +182,10 @@ func GetAgents(url string, apiKey string) *models.Agents {
 	return agents
 }
 
-func GetDepartments(url string, apiKey string) *models.Departments {
+func GetDepartments(url string, apiKey string, perPage string) *models.Departments {
 
-	req, err := http.NewRequest("GET", url+"/api/v2/departments", nil)
+	//pageCount := getDepartmentsCount(apiKey, url, perPage)
+	req, err := http.NewRequest("GET", url+"/api/v2/departments?per_page=100", nil)
 	if err != nil {
 		fmt.Println(err)
 		return nil

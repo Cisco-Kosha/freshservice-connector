@@ -89,7 +89,7 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	allDepartments := httpclient.GetDepartments(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey())
+	allDepartments := httpclient.GetDepartments(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), perPage)
 	if allDepartments.Departments != nil {
 		for _, department := range allDepartments.Departments {
 			departmentsMap[department.ID] = department.Name

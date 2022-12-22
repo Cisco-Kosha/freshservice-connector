@@ -138,15 +138,35 @@ func GetAgents(url string, apiKey string) *models.Agents {
 	return agents
 }
 
-func GetDepartment(url string, id int64, apiKey string) *models.Departments {
+func GetDepartments(url string, apiKey string) *models.Departments {
 
-	departmentId := strconv.Itoa(int(id))
-	req, err := http.NewRequest("GET", url+"/api/v2/departments/"+departmentId, nil)
+	req, err := http.NewRequest("GET", url+"/api/v2/departments", nil)
 	if err != nil {
 		fmt.Println(err)
 		return nil
 	}
 	var department *models.Departments
+
+	res := makeHttpReq(apiKey, req)
+
+	// Convert response body to target struct
+	err = json.Unmarshal(res, &department)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	return department
+}
+
+func GetSingleDepartment(url string, id int64, apiKey string) *models.SingleDepartment {
+
+	dId := strconv.Itoa(int(id))
+	req, err := http.NewRequest("GET", url+"/api/v2/departments/"+dId, nil)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	var department *models.SingleDepartment
 
 	res := makeHttpReq(apiKey, req)
 

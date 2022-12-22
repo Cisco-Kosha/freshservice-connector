@@ -33,6 +33,8 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
 
+	departmentsMap := make(map[int64]string)
+
 	pageNum := r.FormValue("page")
 	if pageNum == "" {
 		pageNum = "1"
@@ -87,6 +89,13 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	allDepartments := httpclient.GetDepartments(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey())
+	if allDepartments.Departments != nil {
+		for _, department := range allDepartments.Departments {
+			departmentsMap[department.ID] = department.Name
+		}
+	}
+
 	for i := pageStart; i <= pageEnd; i++ {
 		_, isNextPage, t := httpclient.GetAllTickets(a.Cfg.GetFreshServiceURL(), a.Cfg.GetApiKey(), strconv.Itoa(i), perPage, false)
 
@@ -108,12 +117,9 @@ func (a *App) getAllTickets(w http.ResponseWriter, r *http.Request) {
 
 			departmentId := ticket.DepartmentID
 			if departmentId != 0 {
-				department := httpclient.GetDepartment(a.Cfg.GetFreshServiceURL(), departmentId, a.Cfg.GetApiKey())
-				if department != nil {
-					departmentName := department.Department.Name
-					if departmentName != "" {
-						ticket.DepartmentName = departmentName
-					}
+				departmentName := departmentsMap[departmentId]
+				if departmentName != "" {
+					ticket.DepartmentName = departmentName
 				}
 			}
 		}
@@ -192,7 +198,7 @@ func (a *App) getSingleTicket(w http.ResponseWriter, r *http.Request) {
 
 	departmentId := t.Ticket.DepartmentID
 	if departmentId != 0 {
-		department := httpclient.GetDepartment(a.Cfg.GetFreshServiceURL(), departmentId, a.Cfg.GetApiKey())
+		department := httpclient.GetSingleDepartment(a.Cfg.GetFreshServiceURL(), departmentId, a.Cfg.GetApiKey())
 		if department != nil {
 			departmentName := department.Department.Name
 			if departmentName != "" {

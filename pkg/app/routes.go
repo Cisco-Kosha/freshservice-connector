@@ -7,6 +7,9 @@ import (
 func (a *App) initializeRoutes() {
 	var apiV2 = "/api/v2"
 
+	// trigger routes
+	a.Router.HandleFunc(apiV2+"/trigger", a.processTrigger).Methods("POST", "OPTIONS")
+	
 	// specification routes
 	a.Router.HandleFunc(apiV2+"/specification/list", a.listConnectorSpecification).Methods("GET", "OPTIONS")
 	a.Router.HandleFunc(apiV2+"/specification/test", a.testConnectorSpecification).Methods("POST", "OPTIONS")

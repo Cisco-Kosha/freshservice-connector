@@ -1,51 +1,42 @@
 # Kosha Freshservice Connector
 
-Freshservice is a cloud-based customer support platform that was founded with the mission of enabling companies of all sizes to provide great customer service.
+Freshservice is a cloud-based customer support platform most commonly used in IT service management functions, enabling IT teams to create service desk tasks, manage projects, and track and report IT assets.
 
-The connector APIs allow you to perform 'RESTful' operations such as reading, modifying, adding or deleting data from your helpdesk. The APIs also support Cross-Origin Resource Sharing (CORS).
+The Kosha Freshservice connector enables you to perform REST API operations from the Freshservice API in your Kosha workflow or custom application. Using the Kosha Freshservice connector, you can directly access the Freshservice platform to:
 
+* List and deactivate Freshservice agents
+* Get and delete assets
+* List, create, and delete Freshservice tickets
 
+## Useful Actions
 
-![Freshservice](images/freshservice.jpg)
+You can use the Kosha Freshservice connector to manage Freshservice agents, assets, tickets, and problems. 
 
-This Connector API exposes REST API endpoints to perform any operations on Freshservice v2 API in a simple, quick and intuitive fashion.
+Refer to the Kosha Freshservice connector [API specification](openapi.json) for details.
 
-It describes various API operations, related request and response structures, and error codes.
+### Agents
 
-## Build
+Agents are managers and technicians you've added to your service desk. Using the agents API, you can list and deactivate Freshservice agents.
 
-To build the project binary, run
-```
-    go build -o main .
+### Assets
 
-```
+IT assets are typically computers, peripherals, other devices, and the software that runs on them. Using the assets API, you can list and delete assets. 
 
-## Run locally
+### Tickets
 
-To run the project, simply provide env variables to supply the API key and Freshdesk domain name.
+In Freshservice, tickets are objects that enable you to track incidents and service requests. Use the tickets API to list, create, and delete Freshservice tickets.
 
+### Groups
 
-```bash
-go build -o main .
-API_KEY=<API_KEY> DOMAIN_NAME=<DOMAIN_NAME> ./main
-```
+In Freshservice, groups are how you add and organize agents within a workspace. Use the groups API to get details about groups. 
 
-This will start a worker and expose the API on port `8012` on the host machine
+### Problems
 
-Swagger docs is available at `https://localhost:8012/docs`
+In Freshservice, problems specify the root cause of an incident. Use the problems API to list and delete problems in your Freshservice incident data. 
 
-## Generating Swagger Documentation
+## Authentication
 
-To generate `swagger.json` and `swagger.yaml` files based on the API documentation, simple run -
+To authenticate when provisioning the Kosha Freshservice connector, you need your:
 
-```bash
-go install github.com/swaggo/swag/cmd/swag@latest
-swag init -g main.go --parseDependency --parseInternal
-```
-
-To generate OpenAPISpec version 3 from Swagger 2.0 specification, run -
-
-```bash
-npm i api-spec-converter
-npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=json ./docs/swagger.json > openapi.json
-```
+* Freshservice API key
+* Freshservice domain name
